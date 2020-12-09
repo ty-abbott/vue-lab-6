@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-card class="mx-auto" max-width="900" v-if="true"> <!-- the new task form is here-->
+    <v-card class="mx-auto" max-width="900" v-if="fetched"> <!-- the new task form is here-->
       <NewTaskForm :createTask="createTask" :form="form"></NewTaskForm>
       <v-divider></v-divider>
       <v-list subheader two-line flat>
