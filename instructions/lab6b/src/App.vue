@@ -1,60 +1,63 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <!-- Link to Material Icons-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"
+      rel="stylesheet"
+      type="text/css"
+    />
+    
+    <!-- TODO: Add an AppBar component here -->
+    <!-- Make sure to pass in the user object as a prop. -->
+    <AppBar :user="user"></AppBar>
+    <v-content>
+      <router-view :user="user"></router-view>
+    </v-content>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+// TODO: Import the app bar component here
 
+import AppBar from '@/components/AppBar'
+// HINT: When writing your import path, you can use the `@` symbol
+// to jump straight to the `src` folder instead of trying to figure
+// out how to do a relative path. Also, if you're trying to access
+// a javascript file called `index.js`, you can skip the entire file
+// name and just use the containing folder's name; e.g.:
+// import thing from '@/util'
+// is the same as:
+// import thing from '../src/util/index.js'
+// Remember, this only works for files called `index.js`. `.vue` files
+// must be imported with the entire file name, including the extension.
+// e.g.:
+// import MyComponent from '@/components/MyComponent.vue'
+// You can delete or move these comments if you'd like.
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    // TODO: Use the Vue Documentation to find out how to use this property
+    AppBar
   },
-
-  data: () => ({
-    //
-  }),
-};
+  asyncComputed: {
+    user: {
+      async get() {
+        // TODO: Use fetch() to get the user from your API
+        // Make sure to include your credentials in the request
+        // Also you might want to still return an object identical
+        // to the `default` below if the fetch() fails
+        const resp = await fetch(`${process.env.VUE_APP_API_ORIGIN}/api/v1/user`,
+        {
+          credentials:`include`, 
+        })
+        if (resp.ok) return resp.json(); 
+        else return { UserName: "Tyler"}
+      },
+      default: {
+        UserName: "Tyler"
+      }
+    }
+  }
+}
 </script>

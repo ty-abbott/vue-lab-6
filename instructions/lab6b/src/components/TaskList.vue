@@ -4,28 +4,30 @@
 
       <!-- TODO: Add a v-for attribute on this tag -->
       <!-- Remember to use the :key attribute to define a key for each task! -->
-      <v-list-item>
+      <v-list-item v-for = "task in tasks" :key="task.id">
 
         <template>
           <v-list-item-action>
 
             <!-- TODO: Add a click event handler attribute here that updates an task -->
-            <v-btn icon>
+            <v-btn icon @click="updateTask(task)">
 
               <!-- TODO: Add a v-if and v-else check here based on the current task's Done property -->
-              <v-icon>check_box</v-icon>
-              <v-icon>check_box_outline_blank</v-icon>
+              <v-icon v-if="task.Done">check_box</v-icon>
+              <v-icon v-else>check_box_outline_blank</v-icon>
 
             </v-btn>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
+              {{task.Text}}
 
               <!-- TODO: Show the value of the task's Text property here -->
 
             </v-list-item-title>
             <v-list-item-subtitle>
-
+              {{task.Date}}
+            
               <!-- TODO: Show the value of the task's Date property here -->
 
             </v-list-item-subtitle>
@@ -33,7 +35,7 @@
           <v-list-item-action>
 
             <!-- TODO: Add a click event handler attribute here that deletes this task -->
-            <v-btn icon>
+            <v-btn icon @click="deleteTask(task)">
 
               <v-icon color="red">delete</v-icon>
             </v-btn>
@@ -52,6 +54,17 @@ export default {
     // Make sure to include these props on the component's tag when using it in another file
     // HINT: For the tasks prop, set the default value to:
     // default: () => []
+    tasks:  {
+        type: Array,
+				key: String,
+				default: () => []
+    },
+    deleteTask: {
+      type: Function
+    }, 
+    updateTask: {
+      type: Function
+    }
   }
 }
 </script>

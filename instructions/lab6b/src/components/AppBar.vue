@@ -7,7 +7,8 @@
       <v-spacer></v-spacer>
 
       <!-- TODO: Use a v-if to only show this button when the user is logged in -->
-      <v-btn icon v-on:click.stop="drawer = !drawer">
+    
+      <v-btn v-if="loggedIn" icon v-on:click.stop="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
@@ -37,7 +38,7 @@
       <v-list dense>
 
         <!-- TODO: Add an :href attribute to this tag so that clicking this link will log a user out -->
-        <v-list-item link>
+        <v-list-item :href="logoutHref" link>
 
           <!-- HINT: When there's a colon before an attribute, that's a short-hand for v-bind: which means -->
           <!-- that in the quotation marks of that attribute, you can put JavaScript! That means you can -->
@@ -61,18 +62,26 @@ import { authenticated } from '@/util'
 export default {
   name: 'AppBar',
   props: {
+    user: {
+      Type: Object, 
+      Default: {
+        Type: Object, 
+        UserName: ""
+      }
+    }
     // TODO: Pass in the user object to this component as a prop
     // Make sure to give it a default value that has the UserName defined as an empty string
   },
   data: () => ({
     drawer: false,
+    logoutHref: `${process.env.VUE_APP_API_ORIGIN}/api/v1/auth/logout`
     // TODO: Get the api's url origin from process.env and set it to a variable here
   }),
   asyncComputed: {
     loggedIn: {
       get: async () => await authenticated(),
       default: false
-    },
+    }, 
   }
 }
 </script>

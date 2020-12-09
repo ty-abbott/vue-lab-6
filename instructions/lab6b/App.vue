@@ -9,7 +9,7 @@
     
     <!-- TODO: Add an AppBar component here -->
     <!-- Make sure to pass in the user object as a prop. -->
-
+    <AppBar :user="user"></AppBar>
     <v-content>
       <router-view :user="user"></router-view>
     </v-content>
@@ -19,6 +19,8 @@
 
 <script>
 // TODO: Import the app bar component here
+
+import AppBar from '@/components/AppBar'
 // HINT: When writing your import path, you can use the `@` symbol
 // to jump straight to the `src` folder instead of trying to figure
 // out how to do a relative path. Also, if you're trying to access
@@ -36,6 +38,7 @@ export default {
   name: 'App',
   components: {
     // TODO: Use the Vue Documentation to find out how to use this property
+    AppBar
   },
   asyncComputed: {
     user: {
@@ -44,9 +47,10 @@ export default {
         // Make sure to include your credentials in the request
         // Also you might want to still return an object identical
         // to the `default` below if the fetch() fails
+        return {userName:"Tyler"}
       },
       default: {
-        UserName: ''
+        UserName: "Tyler"
       }
     }
   }
