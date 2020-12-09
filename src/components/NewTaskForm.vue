@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
   <div id="new-task-form">
     <!-- Add a submit event handler attribute to handle the form submission -->

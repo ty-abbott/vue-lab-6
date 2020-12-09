@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 <template>
   <div class="home">
     <v-card class="mx-auto" max-width="900" v-if="fetched"> <!-- the new task form is here-->
@@ -18,6 +20,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import { getCurrentDate, formatDate } from '@/util'
 // TODO: Import the components you want to use from their files
 import TaskList from '@/components/TaskList.vue'
@@ -66,6 +69,7 @@ export default {
           },
           body:JSON.stringify(form)
         }
+      // eslint-disable-next-line no-unused-vars
       ).then(response => {
         this.readTasks()
         this.form = {
@@ -110,6 +114,7 @@ export default {
           }, 
           body: JSON.stringify({...task, Done: !task.Done})
         }
+      // eslint-disable-next-line no-unused-vars
       ).then(response => {
         this.readTasks()
       })
